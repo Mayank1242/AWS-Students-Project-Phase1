@@ -1,22 +1,33 @@
 # AWS Production Deployment Project – Phase 1 (Ubuntu Version)
+
 ## Highly Available & Auto-Scalable Web Application on AWS
 
 ---
 
-##  Project Overview
+## Project Overview
 
 This project demonstrates a **production-ready deployment architecture** for a static web application on **AWS using Ubuntu Server**.
 
-The website source code is available here:
-
-🔗 Repository: https://github.com/Mayank1242/aws-session2.git  
+**Repository:**  
+https://github.com/Mayank1242/aws-session2.git  
 
 This is **Phase 1 (Initial Deployment)**.  
 Advanced capabilities such as CI/CD, HTTPS, Monitoring, Infrastructure as Code, and Security Enhancements will be added in upcoming phases.
 
 ---
 
-# 🏗️ Architecture Overview (Phase 1)
+## Technology Stack
+
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?style=for-the-badge&logo=ubuntu)
+![Nginx](https://img.shields.io/badge/Nginx-WebServer-009639?style=for-the-badge&logo=nginx)
+![EC2](https://img.shields.io/badge/Amazon-EC2-FF9900?style=for-the-badge&logo=amazonaws)
+![ALB](https://img.shields.io/badge/Load%20Balancer-ALB-blue?style=for-the-badge)
+![AutoScaling](https://img.shields.io/badge/Auto%20Scaling-ASG-green?style=for-the-badge)
+
+---
+
+## Architecture Overview (Phase 1)
 
 ```
                  ┌────────────────────────────┐
@@ -37,7 +48,7 @@ Advanced capabilities such as CI/CD, HTTPS, Monitoring, Infrastructure as Code, 
 
 ---
 
-# 🎯 Project Objective
+## Project Objective
 
 Design and implement a **highly available and auto-scalable web infrastructure** using:
 
@@ -51,10 +62,9 @@ Design and implement a **highly available and auto-scalable web infrastructure**
 
 ---
 
-# 🛠️ AWS Services Used
+## AWS Services Used
 
 - Amazon EC2 – Compute infrastructure  
-- Nginx Web Server – Static content hosting  
 - Custom AMI – Reusable production-ready image  
 - Launch Template – Standardized instance configuration  
 - Application Load Balancer (ALB) – Traffic distribution  
@@ -64,11 +74,9 @@ Design and implement a **highly available and auto-scalable web infrastructure**
 
 ---
 
-# ⚙️ Implementation Steps (Ubuntu Server)
+## Implementation Steps
 
----
-
-## ✅ Step 1: Launch EC2 Instance (Ubuntu)
+### Step 1: Launch EC2 Instance (Ubuntu)
 
 - AMI: Ubuntu Server 22.04 LTS  
 - Instance Type: t2.micro  
@@ -79,7 +87,7 @@ Design and implement a **highly available and auto-scalable web infrastructure**
 
 ---
 
-## ✅ Step 2: Install Nginx
+### Step 2: Install Nginx
 
 ```bash
 sudo apt update -y
@@ -92,17 +100,12 @@ Start and enable Nginx:
 ```bash
 sudo systemctl start nginx
 sudo systemctl enable nginx
-```
-
-Verify status:
-
-```bash
 sudo systemctl status nginx
 ```
 
 ---
 
-## ✅ Step 3: Deploy Website
+### Step 3: Deploy Website
 
 Install Git:
 
@@ -121,11 +124,6 @@ Replace default Nginx content:
 ```bash
 sudo rm -rf /var/www/html/*
 sudo cp -r aws-session2/* /var/www/html/
-```
-
-Restart Nginx:
-
-```bash
 sudo systemctl restart nginx
 ```
 
@@ -137,7 +135,7 @@ http://<EC2-Public-IP>
 
 ---
 
-## ✅ Step 4: Create Custom AMI
+### Step 4: Create Custom AMI
 
 1. Select configured EC2 instance  
 2. Click Actions → Image → Create Image  
@@ -146,7 +144,7 @@ http://<EC2-Public-IP>
 
 ---
 
-## ✅ Step 5: Create Launch Template
+### Step 5: Create Launch Template
 
 - AMI: Custom AMI  
 - Instance Type: t2.micro  
@@ -157,7 +155,7 @@ http://<EC2-Public-IP>
 
 ---
 
-## ✅ Step 6: Create Target Group
+### Step 6: Create Target Group
 
 - Target Type: Instance  
 - Protocol: HTTP  
@@ -167,7 +165,7 @@ http://<EC2-Public-IP>
 
 ---
 
-## ✅ Step 7: Create Application Load Balancer
+### Step 7: Create Application Load Balancer
 
 - Type: Application Load Balancer  
 - Scheme: Internet-facing  
@@ -179,7 +177,7 @@ Copy the Load Balancer DNS Name and verify website accessibility.
 
 ---
 
-## ✅ Step 8: Create Auto Scaling Group
+### Step 8: Create Auto Scaling Group
 
 Using Launch Template:
 
@@ -188,15 +186,15 @@ Using Launch Template:
 - Maximum Capacity: 3  
 - Attach to Target Group  
 
-### 🎯 Scaling Policy Configuration
+#### Scaling Policy Configuration
 
 - Policy Type: Target Tracking Policy  
 - Metric: Average CPU Utilization  
-- Target Value: 50%  
+- Target Value: 50%
 
 ---
 
-# 🔁 Auto Scaling Behavior
+## Auto Scaling Behavior
 
 - Scale Out → When CPU > 50%  
 - Scale In → When CPU < 50%  
@@ -204,9 +202,9 @@ Using Launch Template:
 
 ---
 
-# 🧪 Testing Requirements
+## Testing Requirements
 
-## 🔹 High Availability Test
+### High Availability Test
 
 1. Access website via Load Balancer DNS  
 2. Manually terminate one EC2 instance  
@@ -217,20 +215,20 @@ Using Launch Template:
 
 ---
 
-# 🔒 Security Configuration
+## Security Configuration
 
 | Type | Port | Source |
 |------|------|--------|
 | SSH  | 22   | Your IP |
 | HTTP | 80   | 0.0.0.0/0 |
 
-✔ Only required ports open  
-✔ No unnecessary inbound rules  
-✔ Instances secured behind Load Balancer  
+- Only required ports open  
+- No unnecessary inbound rules  
+- Instances secured behind Load Balancer  
 
 ---
 
-# 📊 Production Best Practices Implemented
+## Production Best Practices Implemented
 
 - Multi-AZ deployment  
 - Load-balanced architecture  
@@ -241,7 +239,7 @@ Using Launch Template:
 
 ---
 
-# 🚧 Future Enhancements (Phase 2 & Beyond)
+## Future Enhancements (Phase 2 & Beyond)
 
 Planned improvements:
 
@@ -256,7 +254,7 @@ Planned improvements:
 
 ---
 
-# 👨‍💻 Author
+## Author
 
 Mayank Mishra  
 Cloud & DevOps Engineer  
@@ -264,7 +262,8 @@ MERN Stack Developer
 
 ---
 
-# ⭐ Project Status
+## Project Status
 
-✅ Phase 1 – Completed  
-🚀 Phase 2 – Coming Soon  
+**Phase 1 – Completed**  
+**Phase 2 – In Progress**
+
