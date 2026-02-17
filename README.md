@@ -146,7 +146,7 @@ http://<EC2-Public-IP>
 
 ### Step 5: Create Launch Template
 
-- AMI: Custom AMI  
+- AMI: MY AMI  
 - Instance Type: t2.micro  
 - Key Pair: Required  
 - Security Group:
